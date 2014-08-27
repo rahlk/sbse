@@ -21,7 +21,7 @@ def pAcceptance(e, en, t):
   return p
  
 # Initial state and energy
-s=randi(-1000,10000)
+s=randi(-1000,1000)
 e=energy(s)
 
 # Initial best state and energy
@@ -29,7 +29,7 @@ sb=s;
 eb=e;
 
 k=1 # Initial temperature
-kmax=10000
+kmax=1000
 emax=40
 
 while (k<kmax): 
