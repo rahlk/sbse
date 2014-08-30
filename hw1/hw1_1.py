@@ -1,5 +1,11 @@
 """
-Simulated Annealing
+  _   _   _   _   _   _   _   _   _    
+ / \ / \ / \ / \ / \ / \ / \ / \ / \ 
+( S | i | m | u | l | a | t | e | d ) 
+ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ 
+ / \ / \ / \ / \ / \ / \ / \ / \ / \ 
+( A | n | n | e | a | l | i | n | g )
+ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/  
 
 Homework 1 
 
@@ -23,8 +29,9 @@ class simulatedAnnealing:
   def energy(x):
     return x**2+(x-2)**2
 
-  def neighbour(x):
-    return x-100+200*rand()
+  def neighbour(x, xmin, xmax):
+    x_new=x+xmin+(xmax-xmin)*rand()
+    return x_new
 
   def pAcceptance(e, en, t):
     p=exp((e-en)/t)
@@ -42,9 +49,10 @@ class simulatedAnnealing:
   kmax=2000
   emax=40
   say(sb)
-
+  xmax=100;
+  xmin=-100;
   while (k<kmax): 
-    sn=neighbour(sb)
+    sn=neighbour(sb,xmax,xmin)
     en=energy(sn)
     t=k/kmax
   #  print t
@@ -57,7 +65,7 @@ class simulatedAnnealing:
       s=sn
       e=en
       say('+')
-  
+
     elif pAcceptance(e, en, t)>rand():
       s=sn
       e=en
@@ -67,4 +75,5 @@ class simulatedAnnealing:
     k=k+1
     if k%50==0: say('\n'), say(sb)
 if __name__=='main':
+
   simulatedAnnealing()
