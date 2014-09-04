@@ -28,7 +28,7 @@ class simulatedAnnealing:
     return e_norm
 
   def neighbour(self, x, xmin, xmax):
-    x_new=x+xmin+(xmax-xmin)*rand(0,1)
+    x_new=xmin+(xmax-xmin)*rand(0,1)
     return x_new
 
   def pAcceptance(self, e, en, t, k):
