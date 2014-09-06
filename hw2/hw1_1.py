@@ -7,7 +7,7 @@ Last updated September, 1st 2014
 
 from __future__ import division
 import sys,re,random,math,datetime,re,time
-sys.dont_write_bytecode = True
+sys.dont_write_bytecode = False
 
 rand=random.uniform
 randi=random.randint
@@ -40,7 +40,7 @@ class simulatedAnnealing:
   def baselining(self):
     emax=0;emin=1;
     for x in xrange(1,10000):
-      x_tmp=randi(-1000,1000)
+      x_tmp=randi(-100,100)
       e=x_tmp**2+(x_tmp-2)**2
 #      print e
       if e>emax:
@@ -49,7 +49,7 @@ class simulatedAnnealing:
         emin=e
     return emax,emin
 
-  f=open('output.log','w')
+  f=open('output.txt','w')
   def say(self,x):
     self.f.write(str(x));
     sys.stdout.flush()
@@ -67,7 +67,7 @@ class main:
   sa=simulatedAnnealing()
 
   # Initial state and energy
-  s=randi(-1000,1000)
+  s=randi(-100,100)
   e=sa.energy(s)
   print e
   # Initial best state and energy
