@@ -24,7 +24,7 @@ class simulatedAnnealing:
     f1=x**2
     f2=(x-2)**2
     e=f1+f2
-    e_norm=(e-emin)/(emax-emin)
+    e_norm= (e-emin)/(emax-emin)
 #    print e_norm
     return e_norm
 
@@ -32,8 +32,8 @@ class simulatedAnnealing:
     x_new=xmin+(xmax-xmin)*rand(0,1)
     return x_new
 
-  def pAcceptance(self, e, en, t, k):
-      p=exp(-(en-e)/(k*t))
+  def randJump(self, e, en, t, k):
+      p=math.e**(-(e-en)/(t*k))<rand(0,1)
 #      print p
       return p
 
@@ -49,7 +49,7 @@ class simulatedAnnealing:
         emin=e
     return emax,emin
 
-  f=open('output.log','w')
+  f=open('log.txt','w')
   def say(self,x):
     self.f.write(str(x));
     sys.stdout.flush()
@@ -67,41 +67,33 @@ class main:
   sa=simulatedAnnealing()
 
   # Initial state and energy
-  s=randi(-1000,1000)
-  e=sa.energy(s)
+  sb=s=randi(-1000,1000)
+  eb=e=sa.energy(s)
   print e
   # Initial best state and energy
-  sb=s;
-  eb=e;
 
   sa.say(sb)
 
-  while (k<kmax):
+  for k in xrange(1,kmax):
     sn=sa.neighbour(s,xmax,xmin)
     en=sa.energy(sn)
     t=k/kmax
 
     if en<eb:
-      sa.say('!')
-      sb=sn
-      eb=en
+      eb, sb=en, sn; sa.say('!')
 
     if en<e:
-      s=sn
-      e=en
-      sa.say('+')
+      s, e = sn, en; sa.say('+')
 
-    elif sa.pAcceptance(e, en, t, 0.0001)>rand(0,1):
-      s=sn
-      e=en
-      sa.say('?')
+    elif sa.randJump(en,e,k,0.0001):
+      s, e=sn, en; sa.say('?')
 
     sa.say('.')
-    k=k+1
     if k%40==0: sa.say('\n'), sa.say(format(sb,'0.2f'))
 
-  sa.say('\n'),sa.say('Best Value Found '),sa.say(format(e,'0.2f'))
+  sa.say('\n'),sa.say('Best Value Found '), sa.say(format(sb,'0.2f'))
 
+# Print Energy and best value.
   print e
   print sb
 if __name__=='main':
