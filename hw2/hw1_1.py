@@ -100,7 +100,7 @@ class main:
     k=k+1
     if k%40==0: sa.say('\n'), sa.say(format(sb,'0.2f'))
 
-  sa.say('\n'),sa.say('Best Value Found '),sa.say(format(e,'0.2f'))
+  sa.say('\n'),sa.say('Best Value Found '),sa.say(format(sb,'0.2f'))
 
   print e
   print sb
