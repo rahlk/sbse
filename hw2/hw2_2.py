@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
+
 """
-Homework 2: The Fonseca Model
+Homework 2: THe Kursawe Model
 Last updated  Sunday, Sep  7 17:51:42 2014
 @author: Rahul Krishna
 """
@@ -13,7 +15,9 @@ sys.dont_write_bytecode = False
 # Define some aliases.
 rand=random.uniform
 randi=random.randint
-e=math.e
+e=math.e 
+sin=math.sin 
+sqrt=math.sqrt
 random.seed()
 
 class simulatedAnnealing:
@@ -22,16 +26,16 @@ class simulatedAnnealing:
     pass
   
   def energy(self,x,emax,emin):
-    f1, f2=(1-e**np.sum([(x[z]-1/(np.sqrt(z+1))) for z in xrange(3)])),\
-    (1-e**np.sum([(x[z]+1/(np.sqrt(z+1))) for z in xrange(0,3)]))
+    a=0.8; b=3; xsize=3
+    f1=np.sum([-10*e**(-0.2*sqrt(x[z]**2+x[z+1]**2)) for z in xrange(xsize-1)])
+    f2=np.sum([abs(x[z])**a+5*sin(x[z]**b)])
     ener=f1+f2
-    eNorm= (ener-emin)/(emax-emin)
-#   print e_norm
-    return eNorm
+    eMron= (ener-emin)/(emax-emin)
+    return eMron
 
   def neighbour(self,x,xmax,xmin):
     def __new(x,z):
-        return xmin+(xmax-xmin)*rand(0,1) if rand(0,1)<0.5 else x[z] 
+        return xmin+(xmax-xmin)*rand(0,1) if rand(0,1)<0.33 else x[z] 
     x_new=[__new(x,z) for z in xrange(3)]
     return x_new
 
@@ -41,19 +45,18 @@ class simulatedAnnealing:
       return p
 
   def baselining(self):
-    emax=-1;emin=1;
+    emax=-1;emin=1; a=0.8; b=3; xsize=3;
     for x in xrange(int(1e3)):
-      x_tmp=[randi(-4,4) for z in xrange(3)]
-      ener=(1-e**np.sum([(x_tmp[z]-1/(np.sqrt(z+1))) for z in xrange(3)]))+\
-      (1-e**np.sum([(x_tmp[z]+1/(np.sqrt(z+1))) for z in xrange(3)]))
-      
+      x_tmp=[randi(-5,5) for z in xrange(3)]
+      ener=np.sum([-10*e**(-0.2*sqrt(x_tmp[z]**2+x_tmp[z+1]**2)) for z in xrange(xsize-1)])+\
+      np.sum([abs(x_tmp[z])**a+5*sin(x_tmp[z]**b)])
       if ener>=emax:
         emax=ener
       elif ener<=emin:
         emin=ener
     return emax,emin
 
-  f=open('log_sa_fonseca.txt','w')
+  f=open('log_sa_kursawe.txt','w')
   def say(self,x):
     self.f.write(str(x));
     sys.stdout.flush()
@@ -63,7 +66,7 @@ class simulatedAnnealing:
 class main:
 
   k=1
-  kmax=5000
+  kmax=2000
 
   xmax=4;
   xmin=-4;
@@ -90,12 +93,12 @@ class main:
     if en<e:
       s, e = sn, en; sa.say('+')
 
-    elif sa.do_a_randJump(en,e,k,1e-3): # The cooling factor needs to be reallylow for some reason!!
+    elif sa.do_a_randJump(en,e,k,1e-2): # The cooling factor needs to be reallylow for some reason!!
       s, e=sn, en; sa.say('?')
 
     sa.say('.')
     if k%40==0: sa.say('\n')# sa.say(format(sb,'0.2f'))
-
+    print e
   sa.say('\n'),sa.say('Best Value Found '), sa.say(sb)
 
 # Print Energy and best value.
