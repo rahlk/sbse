@@ -23,16 +23,21 @@ class simulatedAnnealing:
 
   def energy(self,x):
     emax, emin = self.baselining()
-    f1, f2=(1-e**np.sum([(x[z]-1/(np.sqrt(z+1))) for z in xrange(0,3)])), \
+    f1, f2=(1-e**np.sum([(x[z]-1/(np.sqrt(z+1))) for z in xrange(3)])),\
     (1-e**np.sum([(x[z]+1/(np.sqrt(z+1))) for z in xrange(0,3)]))
     ener=f1+f2
     e_norm= (ener-emin)/(emax-emin)
 #   print e_norm
     return e_norm
 
-  def neighbour(xmax,xmin):
-    x=[xmin+(xmax-xmin)*rand(0,1) for z in xrange(3)]
-    return x
+  def neighbour(self,x,xmax,xmin):
+    def __new(x,z):
+      if rand(0,1)>0.33:
+        return xmin+(xmax-xmin)*rand(0,1)
+      else:
+        return x[z]
+    x_new=[__new(x,z) for z in xrange(3)]
+    return x_new
 
   def randJump(self, e, en, t, k):
       p=math.e**(-(e-en)/(t*k))<rand(0,1)
@@ -70,36 +75,31 @@ class main:
   sa=simulatedAnnealing()
 
   # Initial state and energy
-<<<<<<< HEAD
-  sb=s=randi(-1000,1000)
+  sb=s=[rand(-4,4) for z in xrange(3)]
   eb=e=sa.energy(s)
-=======
-  s=randi(-100,100)
-  e=sa.energy(s)
->>>>>>> 491fdd592d5769557842e0777604f79905108754
   print e
-  # Initial best state and energy
 
-  sa.say(sb)
+  print 'Initial Best', sb
 
   for k in xrange(1,kmax):
+    #print k
     sn=sa.neighbour(s,xmax,xmin)
     en=sa.energy(sn)
     t=k/kmax
 
     if en<eb:
-      eb, sb=en, sn; sa.say('!')
+      eb, sb=en, sn; sys.stdout.write('!')
 
     if en<e:
-      s, e = sn, en; sa.say('+')
+      s, e = sn, en; sys.stdout.write('+')
 
     elif sa.randJump(en,e,k,0.0001):
-      s, e=sn, en; sa.say('?')
+      s, e=sn, en; sys.stdout.write('?')
 
-    sa.say('.')
-    if k%40==0: sa.say('\n'), sa.say(format(sb,'0.2f'))
+    sys.stdout.write('.')
+    if k%40==0: sys.stdout.write('\n')# sa.say(format(sb,'0.2f'))
 
-  sa.say('\n'),sa.say('Best Value Found '), sa.say(format(sb,'0.2f'))
+  sys.stdout.write('\n'),sys.stdout.write('Best Value Found '), #sa.say(format(sb,'0.2f'))
 
 # Print Energy and best value.
   print e
