@@ -126,7 +126,7 @@ class main:
         say('\n')
         if score(xn,emax,emin)<score(xb,emax,emin):
             xb=xn
-    say('Best solution found: '), say(xn)
+    say('Best solution found: '), say(xb)
                 
                 
         
