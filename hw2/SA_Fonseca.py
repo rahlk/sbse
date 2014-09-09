@@ -24,7 +24,7 @@ class simulatedAnnealing:
   def energy(self,x,emax,emin):
     f1, f2=(1-e**np.sum([(x[z]-1/(np.sqrt(z+1))) for z in xrange(3)])),\
     (1-e**np.sum([(x[z]+1/(np.sqrt(z+1))) for z in xrange(0,3)]))
-    ener=f1+f2
+    ener=f1-f2
     eNorm= (ener-emin)/(emax-emin)
 #   print e_norm
     return eNorm
@@ -44,7 +44,7 @@ class simulatedAnnealing:
     emax=-1;emin=1;
     for x in xrange(int(1e3)):
       x_tmp=[randi(-4,4) for z in xrange(3)]
-      ener=(1-e**np.sum([(x_tmp[z]-1/(np.sqrt(z+1))) for z in xrange(3)]))+\
+      ener=(1-e**np.sum([(x_tmp[z]-1/(np.sqrt(z+1))) for z in xrange(3)]))-\
       (1-e**np.sum([(x_tmp[z]+1/(np.sqrt(z+1))) for z in xrange(3)]))
       
       if ener>=emax:
@@ -63,7 +63,7 @@ class simulatedAnnealing:
 class main:
 
   k=1
-  kmax=5000
+  kmax=2000
 
   xmax=4;
   xmin=-4;
@@ -90,7 +90,7 @@ class main:
     if en<e:
       s, e = sn, en; sa.say('+')
 
-    elif sa.do_a_randJump(en,e,k,1e-3): # The cooling factor needs to be reallylow for some reason!!
+    elif sa.do_a_randJump(en,e,k,1e-5): # The cooling factor needs to be reallylow for some reason!!
       s, e=sn, en; sa.say('?')
 
     sa.say('.')

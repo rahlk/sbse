@@ -77,7 +77,7 @@ class main:
   # Initial state and energy
   sb=s=[rand(-4,4) for z in xrange(3)]
   eb=e=sa.energy(s,emax,emin)
-  print e
+  #print e
 
   print 'Initial Best', sb
 
@@ -98,7 +98,7 @@ class main:
 
     sa.say('.')
     if k%40==0: sa.say('\n')# sa.say(format(sb,'0.2f'))
-    print e
+
   sa.say('\n'),sa.say('Best Value Found '), sa.say(sb)
 
 # Print Energy and best value.
