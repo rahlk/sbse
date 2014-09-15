@@ -93,7 +93,7 @@ class main:
     if en<e:
       s, e = sn, en; sa.say('+')
 
-    elif sa.do_a_randJump(en,e,k,1e-2): # The cooling factor needs to be reallylow for some reason!!
+    elif sa.do_a_randJump(en,e,k,kooling): # The cooling factor needs to be reallylow for some reason!!
       s, e=sn, en; sa.say('?')
 
     sa.say('.')
