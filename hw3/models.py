@@ -4,7 +4,7 @@ A models file that can be imported to run optimizers
 from __future__ import division
 import sys
 import math, random, numpy as np, scipy as sp
-sys.dont_write_bytecode = True
+sys.dont_write_bytecode = False
 # Define some aliases.
 rand=random.uniform
 randi=random.randint
@@ -15,11 +15,15 @@ sqrt=math.sqrt
 class modelBasics(object):
   def __init__(i,model):
     i.model=model()
-  def do_a_randJump(self, e, en, t, k):
+    i.name=model.__name__
+  def do_a_randJump(i, e, en, t, k):
     p=exp**(-(e-en)/(t**k))<rand(0,1)
     return p
-  def neighbour(self,x,xmax,xmin):
-    return [xmin+(xmax-xmin)*rand(0,1)]
+  def neighbour(i,x,xmax,xmin):
+    def __new(x,z):
+        return xmin+(xmax-xmin)*rand(0,1) if rand(0,1)<1/(i.model.indepSize) else x[z] 
+    x_new=[__new(x,z) for z in xrange(i.model.indepSize)]
+    return x_new
   def energy(i,x,emax,emin):
     ener=i.model.score(x);
     e_norm= (ener-emin)/(emax-emin)
@@ -27,8 +31,8 @@ class modelBasics(object):
   def baselining(i,model):
     emax=0;emin=1;
     indepSize=i.model.indepSize;
-    for x in xrange(10000):
-      x_tmp=[randi(-1000,1000) for z in xrange(indepSize)]
+    for x in xrange(1000):
+      x_tmp=[rand(i.model.baselo,i.model.basehi) for z in xrange(indepSize)]
       ener=i.model.score(x_tmp);
       if ener>emax:
         emax=ener
@@ -42,8 +46,9 @@ class modelBasics(object):
       
 class Schaffer(object):
 
-  def __init__(i,hi=100,lo=-100,kooling=0.7, indepSize=1, iterations=2000):
-    i.hi, i.lo, i.kooling, i.indepSize, i.iterations= hi, lo, kooling, indepSize, iterations
+  def __init__(i,hi=100,lo=-100, basehi=1000, baselo=-1000, kooling=0.7, indepSize=1, iterations=2000):
+    i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= hi, lo, basehi, baselo, kooling, indepSize, iterations
+    random.seed()
   def f1(i,x):
     return x*x
   def f2(i,x):
@@ -54,17 +59,43 @@ class Schaffer(object):
     return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
     
 class Kursawe(object):
-  def __init__(i,hi=5,lo=-5,kooling=0.6, a=0.8, b=3, indepSize=3, iterations=2000):
-    i.hi, i.lo, i.kooling, i.a, i.b, i.indepSize, i.iterations= hi, lo, kooling, a, b, indepSize, iterations
+  def __init__(i,hi=5,lo=-5,kooling=0.6, a=0.8, b=3, indepSize=3, basehi=1000, baselo=-1000, iterations=2000):
+    i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.a, i.b, i.indepSize, i.iterations= hi, lo, basehi, baselo, kooling, a, b, indepSize, iterations
+    random.seed()
   def f1(i,x):
     return np.sum([-10*exp**(-0.2*sqrt(x[z]**2+x[z+1]**2)) for z in xrange(i.indepSize-1)])
   def f2(i,x):
-    np.sum([abs(x[z])**i.a+5*sin(x[z]**i.b) for z in xrange(i.indepSize)])
+    return np.sum([abs(x[z])**i.a+5*sin(x[z]**i.b) for z in xrange(i.indepSize)])
   def score(i,x):
     return i.f1(x)+i.f2(x)
   def getInit(i):
     return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
+    
+class Fonseca(object):
+  def __init__(i,hi=4,lo=-4, basehi=4, baselo=-4, kooling=1.99, indepSize=3, iterations=2000):
+    i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= hi, lo, basehi, baselo, kooling, indepSize, iterations
+    random.seed()
+  def f1(i,x):
+    return (1-exp**np.sum([(x[z]-1/(np.sqrt(z+1))) for z in xrange(i.indepSize)]))
+  def f2(i,x):
+    return (1-exp**np.sum([(x[z]+1/(np.sqrt(z+1))) for z in xrange(i.indepSize)]))
+  def score(i,x):
+    return i.f1(x)-i.f2(x)
+  def getInit(i):
+    return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
+    
+class ZDT1(object):
+  def __init__(i,hi=1,lo=0, basehi=1, baselo=0, kooling=1.99, indepSize=30, iterations=2000):
+    i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= hi, lo, basehi, baselo, kooling, indepSize, iterations
+    random.seed()
   
-    
-    
-
+  def f1(i,x):
+    return x[0]
+  def g(i,x):
+    return (1+9*(np.sum(x[1:]))/(i.indepSize-1))
+  def f2(i,x):
+    return i.g(x)*(1-sqrt(x[0]/i.g(x)))
+  def score(i,x):
+    return i.f1(x)+i.f2(x)
+  def getInit(i):
+    return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
