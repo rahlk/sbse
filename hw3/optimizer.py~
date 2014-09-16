@@ -40,7 +40,7 @@ def xtile(lst,lo=0,hi=0.001,width=50,
 for x in [Schaffer, Kursawe, Fonseca, ZDT1]:
   eb=50*[None]
   for y in [sa, MaxWalkSat]:
-    for r in xrange(1):
+    for r in xrange(50):
       print '\n', x.__name__, y.__name__, '\n', strftime("%a, %d %b %Y %H:%M:%S ", gmtime())
       a=y(x,disp=False)
       k=x()

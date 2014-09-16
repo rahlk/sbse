@@ -1,0 +1,44 @@
+Schaffer sa 
+
+min= -100 , max= 100 , Cooling Factor= 0.7
+2.50397945245e-08
+
+Schaffer MaxWalkSat 
+
+min= -100 , max= 100 , Cooling Factor= 0.7
+3.97393722735
+--------------------------------------------------
+
+Kursawe sa 
+
+min= -5 , max= 5 , Cooling Factor= 0.6
+-0.00185836496395
+
+Kursawe MaxWalkSat 
+
+min= -5 , max= 5 , Cooling Factor= 0.6
+0.00698540192931
+--------------------------------------------------
+
+Fonseca sa 
+
+min= -4 , max= 4 , Cooling Factor= 1.99
+-1.76631081182e-11
+
+Fonseca MaxWalkSat 
+
+min= -4 , max= 4 , Cooling Factor= 1.99
+0.0496958802607
+--------------------------------------------------
+
+ZDT1 sa 
+
+min= 0 , max= 1 , Cooling Factor= 1.99
+0.00679647940357
+
+ZDT1 MaxWalkSat 
+
+min= 0 , max= 1 , Cooling Factor= 1.99
+0.363347316992
+--------------------------------------------------
+
