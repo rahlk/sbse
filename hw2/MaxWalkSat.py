@@ -71,8 +71,7 @@ class mWalkSat:
             emin=ener
         return emax, emin
 
-    def neighbour(self,x,xmax,xmin):
-        return xmin+(xmax-xmin)*rand(0,1)
+    
 
     f=open('log_mwalksat.txt','w')
     def say(self,x):

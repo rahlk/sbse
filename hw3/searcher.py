@@ -7,7 +7,6 @@ Created on Mon Sep 15 03:04:43 2014
 from __future__ import division
 import sys
 import math, random, numpy as np, scipy as sp
-from scipy.odr import models
 sys.dont_write_bytecode = False
 from models import *
 
@@ -58,6 +57,56 @@ class sa(object):
     if self.disp: 
       modelbasics.say('\n')
     return eb
+
+class MaxWalkSat(object):
+  def __init__(self, modelName, disp=False, maxTries=100, maxChanges=100):
+    self.modelName=modelName
+    self.disp=disp
+    self.maxTries=maxTries
+    self.maxChanges=maxChanges
+  def runSearcher(self):
+    modelbasics=modelBasics(self.modelName);
+    modelFunction=self.modelName()
+    hi, lo, kooling, indepSize, iterations=  modelFunction.getInit()
+    emax, emin = modelbasics.baselining(self.modelName)
+    for i in xrange(self.maxTries):
+        # Lets create a random assignment, I'll use list comprehesions here.
+        x=xn=xb=[rand(-lo,hi) for z in xrange(indepSize)]
+        # Create a threshold for energy, let's say thresh=0.1% of emax (which is 1) for starters
+        thresh=1e-7
+        for j in xrange(self.maxChanges):
+            # Let's check if energy has gone below the threshold.
+            # If so, look no further.
+            if modelbasics.energy(xn,emax,emin)<thresh:
+                if self.disp:
+                  modelbasics.say('.')
+                break
+            else:
+                randIndx=randi(0,indepSize-1) # Choose a random part of solution x
+                if rand(0,1)<1/indepSize: # Probablity p=0.33
+                    y=xn[randIndx]
+                    xn[randIndx]=modelbasics.simpleneighbour(y,hi,lo)
+                    if self.disp:
+                      modelbasics.say('+')
+                    #print 'Random change on', randIndx
+                else:
+                    # xTmp is a temporary variable
+                    xTmp= xn; xTmp[randIndx]=rand(lo,hi)
+                    xBest=modelbasics.energy(xTmp,emax,emin);
+                    # Step from xmin to xmax, take 10 steps
+                    Step=np.linspace(lo,hi,10)
+                    if self.disp:
+                      modelbasics.say('!')
+                    for i in xrange(np.size(Step)):
+                        xNew=xn; xNew[randIndx]=Step[i];
+                        if modelbasics.energy(xNew,emax,emin)<xBest:
+                            xBest=modelbasics.energy(xNew,emax,emin)
+                            xn=xNew
+        
+        if modelbasics.energy(xn,emax,emin)<modelbasics.energy(xb,emax,emin):
+          xb=xn
+    return modelbasics.energy(xb,hi,lo)
+    
 if __name__=='main':
   sa(Schaffer)
   

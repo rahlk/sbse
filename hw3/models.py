@@ -19,6 +19,8 @@ class modelBasics(object):
   def do_a_randJump(i, e, en, t, k):
     p=exp**(-(e-en)/(t**k))<rand(0,1)
     return p
+  def simpleneighbour(self,x,xmax,xmin):
+      return xmin+(xmax-xmin)*rand(0,1)
   def neighbour(i,x,xmax,xmin):
     def __new(x,z):
         return xmin+(xmax-xmin)*rand(0,1) if rand(0,1)<1/(i.model.indepSize) else x[z] 
