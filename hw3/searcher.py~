@@ -15,7 +15,7 @@ rand=random.uniform
 randi=random.randint
 exp=math.exp
 
-class SimulatedAnnealer(object):
+class sa(object):
   def __init__(self,modelName, disp=False):
     self.modelName=modelName
     self.disp=disp
