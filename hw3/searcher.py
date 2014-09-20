@@ -83,7 +83,7 @@ class MaxWalkSat(object):
                 break
             else:
                 randIndx=randi(0,indepSize-1) # Choose a random part of solution x
-                if rand(0,1)<0.5: # Probablity p=0.33
+                if rand(0,1)>1/(indepSize+1): # Probablity p=0.33
                     y=xn[randIndx]
                     xn[randIndx]=modelbasics.simpleneighbour(y,hi,lo)
                     if self.disp:
@@ -91,8 +91,7 @@ class MaxWalkSat(object):
                     #print 'Random change on', randIndx
                 else:
                     # xTmp is a temporary variable
-                    xTmp= xn; xTmp[randIndx]=rand(lo,hi)
-                    xBest=modelbasics.energy(xTmp,emax,emin);
+                    xBest=emax;
                     # Step from xmin to xmax, take 10 steps
                     Step=np.linspace(lo,hi,100)
                     if self.disp:
@@ -101,11 +100,13 @@ class MaxWalkSat(object):
                         xNew=xn; xNew[randIndx]=Step[i];
                         if modelbasics.energy(xNew,emax,emin)<xBest:
                             xBest=modelbasics.energy(xNew,emax,emin)
-                            xn=xNew        
+                            xn=xNew
+        
         if modelbasics.energy(xn,emax,emin)<modelbasics.energy(xb,emax,emin):
           xb=xn
-    #print xb
-    return modelbasics.energy(xb,emax,emin)
+    return modelbasics.energy(xb,hi,lo)
+    print modelbasics.energy(xb,hi,lo)
     
 if __name__=='main':
-  sa(Schaffer)
+  MaxWalkSat(Schaffer)
+  
