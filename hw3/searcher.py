@@ -22,7 +22,7 @@ class SimulatedAnnealer(object):
   def runSearcher(self):
     modelbasics=modelBasics(self.modelName);
     modelFunction=self.modelName()
-    hi, lo, kooling, indepSize, iterations=  modelFunction.getInit()
+    hi, lo, kooling, indepSize, iterations=  modelFunction.eigenschaften()
     emax, emin = modelbasics.baselining(self.modelName)
     sb=s=[randi(lo,hi) for z in xrange(indepSize)];
     eb=e= modelbasics.energy(s,emax,emin)
@@ -67,11 +67,11 @@ class MaxWalkSat(object):
   def runSearcher(self):
     modelbasics=modelBasics(self.modelName);
     modelFunction=self.modelName()
-    hi, lo, kooling, indepSize, iterations=  modelFunction.getInit()
+    hi, lo, kooling, indepSize, iterations=  modelFunction.eigenschaften()
     emax, emin = modelbasics.baselining(self.modelName)
     for i in xrange(self.maxTries):
         # Lets create a random assignment, I'll use list comprehesions here.
-        x=xn=xb=[rand(-lo,hi) for z in xrange(indepSize)]
+        x=xn=xb=[rand(lo,hi) for z in xrange(indepSize)]
         # Create a threshold for energy, let's say thresh=0.1% of emax (which is 1) for starters
         thresh=1e-7
         for j in xrange(self.maxChanges):
@@ -83,7 +83,7 @@ class MaxWalkSat(object):
                 break
             else:
                 randIndx=randi(0,indepSize-1) # Choose a random part of solution x
-                if rand(0,1)<1/indepSize: # Probablity p=0.33
+                if rand(0,1)<0.5: # Probablity p=0.33
                     y=xn[randIndx]
                     xn[randIndx]=modelbasics.simpleneighbour(y,hi,lo)
                     if self.disp:
@@ -94,19 +94,18 @@ class MaxWalkSat(object):
                     xTmp= xn; xTmp[randIndx]=rand(lo,hi)
                     xBest=modelbasics.energy(xTmp,emax,emin);
                     # Step from xmin to xmax, take 10 steps
-                    Step=np.linspace(lo,hi,10)
+                    Step=np.linspace(lo,hi,100)
                     if self.disp:
                       modelbasics.say('!')
                     for i in xrange(np.size(Step)):
                         xNew=xn; xNew[randIndx]=Step[i];
                         if modelbasics.energy(xNew,emax,emin)<xBest:
                             xBest=modelbasics.energy(xNew,emax,emin)
-                            xn=xNew
-        
+                            xn=xNew        
         if modelbasics.energy(xn,emax,emin)<modelbasics.energy(xb,emax,emin):
           xb=xn
-    return modelbasics.energy(xb,hi,lo)
+    #print xb
+    return modelbasics.energy(xb,emax,emin)
     
 if __name__=='main':
   sa(Schaffer)
-  

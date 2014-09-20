@@ -11,6 +11,7 @@ randi=random.randint
 exp=math.e
 sin=math.sin 
 sqrt=math.sqrt
+pi=math.pi
 
 class modelBasics(object):
   def __init__(i,model):
@@ -57,7 +58,7 @@ class Schaffer(object):
     return (x-2)**2
   def score(i,x):
     return i.f1(x[0])+i.f2(x[0])
-  def getInit(i):
+  def eigenschaften(i):
     return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
     
 class Kursawe(object):
@@ -70,7 +71,7 @@ class Kursawe(object):
     return np.sum([abs(x[z])**i.a+5*sin(x[z]**i.b) for z in xrange(i.indepSize)])
   def score(i,x):
     return i.f1(x)+i.f2(x)
-  def getInit(i):
+  def eigenschaften(i):
     return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
     
 class Fonseca(object):
@@ -83,14 +84,13 @@ class Fonseca(object):
     return (1-exp**np.sum([(x[z]+1/(np.sqrt(z+1))) for z in xrange(i.indepSize)]))
   def score(i,x):
     return i.f1(x)-i.f2(x)
-  def getInit(i):
+  def eigenschaften(i):
     return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
     
 class ZDT1(object):
   def __init__(i,hi=1,lo=0, basehi=1, baselo=0, kooling=1.99, indepSize=30, iterations=2000):
     i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= hi, lo, basehi, baselo, kooling, indepSize, iterations
     random.seed()
-  
   def f1(i,x):
     return x[0]
   def g(i,x):
@@ -99,5 +99,43 @@ class ZDT1(object):
     return i.g(x)*(1-sqrt(x[0]/i.g(x)))
   def score(i,x):
     return i.f1(x)+i.f2(x)
-  def getInit(i):
+  def eigenschaften(i): # German for features
     return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
+  
+class ZDT3(object):
+  def __init__(i,hi=1,lo=0, basehi=1, baselo=0, kooling=1.99, indepSize=30, iterations=2000):
+    i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= hi, lo, basehi, baselo, kooling, indepSize, iterations 
+    random.seed()
+  def f1(i,x):
+    return x[0]
+  def g(i,x):
+    return (1+9*(np.sum(x[1:]))/(i.indepSize-1))
+  def f2(i,x):
+    from cmath import sin
+    return i.g(x)*(1-sqrt(x[0]/i.g(x))-x[0]/i.g(x[0]/i.g(x))*sin(10*pi*x[0]))
+  def score(i,x):
+    return i.f1(x)+i.f2(x)
+  def eigenschaften(i): # German for features
+    return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
+
+"""
+class Viennet3(object):
+  def __init__(i,hi=1,lo=0, basehi=1, baselo=0, kooling=1.99, indepSize=2, iterations=2000):
+    i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= hi, lo, basehi, baselo, kooling, indepSize, iterations 
+    random.seed()
+  def f1(i,x):
+    return 0.5*x[0]**2+x[1]**2+sin(x[0]**2+x[1]**2)
+  def f2(i,x):
+    return (3*x[0]-2*x[2]+4)**2/8+(x[0]-x[2]+1)**2/175+15
+  def f3(i,x):
+    return 1/(x[0]+x[1]+1)-1.1*exp**(-x[0]**2-x[1]**2)
+  def score(i,x):
+    return i.f1(x)+i.f2(x)+i.f3(x)
+  def eigenschaften(i): # German for features
+    return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
+
+"""
+  
+  
+    
+  
