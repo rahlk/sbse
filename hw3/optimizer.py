@@ -9,9 +9,9 @@ import sys, random, math, datetime, time,re
 sys.dont_write_bytecode = True
 
 
-for x in [Schaffer, Kursawe, Fonseca, ZDT1]:
+for x in [Kursawe]:#[Schaffer, Kursawe, Fonseca, ZDT1]:
   eb=50*[None]
-  for y in [SimulatedAnnealer, MaxWalkSat]:
+  for y in [MaxWalkSat]:#[SimulatedAnnealer, MaxWalkSat]:
     print 'Model: ', x.__name__ 
     print 'Searcher: ', y.__name__ 
     print strftime("%a, %d %b %Y %H:%M:%S ", gmtime()), '\n'

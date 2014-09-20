@@ -71,7 +71,7 @@ class MaxWalkSat(object):
     emax, emin = modelbasics.baselining(self.modelName)
     for i in xrange(self.maxTries):
         # Lets create a random assignment, I'll use list comprehesions here.
-        x=xn=xb=[rand(-lo,hi) for z in xrange(indepSize)]
+        x=xn=xb=[rand(lo,hi) for z in xrange(indepSize)]
         # Create a threshold for energy, let's say thresh=0.1% of emax (which is 1) for starters
         thresh=1e-7
         for j in xrange(self.maxChanges):
@@ -83,7 +83,7 @@ class MaxWalkSat(object):
                 break
             else:
                 randIndx=randi(0,indepSize-1) # Choose a random part of solution x
-                if rand(0,1)<1/indepSize: # Probablity p=0.33
+                if rand(0,1)>1/(indepSize+1): # Probablity p=0.33
                     y=xn[randIndx]
                     xn[randIndx]=modelbasics.simpleneighbour(y,hi,lo)
                     if self.disp:
@@ -91,10 +91,9 @@ class MaxWalkSat(object):
                     #print 'Random change on', randIndx
                 else:
                     # xTmp is a temporary variable
-                    xTmp= xn; xTmp[randIndx]=rand(lo,hi)
-                    xBest=modelbasics.energy(xTmp,emax,emin);
+                    xBest=emax;
                     # Step from xmin to xmax, take 10 steps
-                    Step=np.linspace(lo,hi,10)
+                    Step=np.linspace(lo,hi,100)
                     if self.disp:
                       modelbasics.say('!')
                     for i in xrange(np.size(Step)):
