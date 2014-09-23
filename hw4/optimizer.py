@@ -14,7 +14,7 @@ for x in [Schaffer,
           Kursawe, Fonseca, ZDT1, Viennet3]:
   early=True
   eb=30*[0]
-  for y in [SimulatedAnnealer]:#[SimulatedAnnealer, MaxWalkSat]:
+  for y in [MaxWalkSat]:#[SimulatedAnnealer, MaxWalkSat]:
     print 'Model: ', x.__name__ 
     print 'Searcher: ', y.__name__ 
     print strftime("%a, %d %b %Y %H:%M:%S ", gmtime()), '\n'
@@ -26,7 +26,7 @@ for x in [Schaffer,
     print 'min=', lo, ', max=', hi, ', Cooling Factor=', kooling, '\n'
     if early: print 'Early Termination!'  , '\n'
     for r in xrange(reps):
-      a=y(x,disp=True,early=early)
+      a=y(x,disp=False,early=early)
       eb[r] =  a.runSearcher()
     
     #print dspl.xtile(eb[1:])
