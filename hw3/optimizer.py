@@ -10,8 +10,8 @@ import sys, random, math, datetime, time,re
 sys.dont_write_bytecode = True
 
 
-for x in [Schaffer, 
-          Kursawe, Fonseca, ZDT1, Viennet3]:
+for x in [Schaffer, Kursawe, 
+          Fonseca, ZDT1, Viennet3]:
   early=True
   eb=30*[0]
   for y in [SimulatedAnnealer]:#[SimulatedAnnealer, MaxWalkSat]:
@@ -30,7 +30,7 @@ for x in [Schaffer,
       eb[r] =  a.runSearcher()
     
     #print dspl.xtile(eb[1:])
-    """for r in xrange(4):
+    """for r in xrange(reps):
       print dspl.xtile(eb[r:r+50], lo=lo, hi=hi)"""
     print 'Energy: ', "{:.3E}".format(Decimal(str(np.sum(eb)/reps)))
     

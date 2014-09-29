@@ -79,9 +79,9 @@ class Fonseca(object):
     i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= hi, lo, basehi, baselo, kooling, indepSize, iterations
     random.seed()
   def f1(i,x):
-    return (1-exp**np.sum([(x[z]-1/(np.sqrt(z+1))) for z in xrange(i.indepSize)]))
+    return (1-exp**np.sum([(x[z]-1/(np.sqrt(i.indepSize))) for z in xrange(i.indepSize)]))
   def f2(i,x):
-    return (1-exp**np.sum([(x[z]+1/(np.sqrt(z+1))) for z in xrange(i.indepSize)]))
+    return (1-exp**np.sum([(x[z]+1/(np.sqrt(i.indepSize))) for z in xrange(i.indepSize)]))
   def score(i,x):
     return i.f1(x)-i.f2(x)
   def eigenschaften(i):
@@ -125,9 +125,9 @@ class Viennet3(object):
   def f1(i,x):
     return 0.5*x[0]**2+x[1]**2+sin(x[0]**2+x[1]**2)
   def f2(i,x):
-    return (3*x[0]-2*x[1]+4)**2/8+(x[0]-x[1]+1)**2/175+15
+    return (3*x[0]-2*x[1]+4)**2/8+(x[0]-x[1]+1)**2/27+15
   def f3(i,x):
-    return 1/(x[0]+x[1]+1)-1.1*exp**(-x[0]**2-x[1]**2)
+    return 1/(x[0]**2+x[1]**2+1)-1.1*exp**(-x[0]**2-x[1]**2)
   def score(i,x):
     return i.f1(x)+i.f2(x)+i.f3(x)
   def eigenschaften(i): # German for features

@@ -47,16 +47,16 @@ class SimulatedAnnealer(object):
           modelbasics.say('!')
 
       if en < e:
-        s, e, enRec[k] = sn, en, eb; 
+        s, e, enRec[k] = sn, en, en; 
         if self.disp: 
           modelbasics.say('+')
 
-      elif modelbasics.do_a_randJump(en, e, t, kooling):  # The cooling factor needs to be reallylow for some reason!!
-        s, e, enRec[k] = sn, en, eb; 
+      if modelbasics.do_a_randJump(en, e, t, kooling):  # The cooling factor needs to be reallylow for some reason!!
+        s, e, enRec[k] = sn, en, en; 
         if self.disp: 
           modelbasics.say('?')
       else:
-        enRec[k] = eb  
+        enRec[k] = en  
       if self.disp:
         modelbasics.say('.')
       if k % 50 == 0 and k > 50:
@@ -127,10 +127,11 @@ class MaxWalkSat(object):
                         if modelbasics.energy(xNew, emax, emin) < xBest:
                             xBest = modelbasics.energy(xNew, emax, emin)
                             xn = xNew
-        
-        if modelbasics.energy(xn, emax, emin) < modelbasics.energy(xb, emax, emin):
-          xb = xn
-    return modelbasics.energy(xb, hi, lo)
+            
+            if modelbasics.energy(xn, emax, emin) < modelbasics.energy(xb, emax, emin):
+              xb = xn
+              print modelbasics.energy(xn, emax, emin)
+    return modelbasics.energy(xb, emax, emin)
     
 if __name__ == 'main':
   SimulatedAnnealer(Schaffer)
