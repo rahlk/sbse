@@ -69,8 +69,8 @@ class Schaffer(object):
 class Kursawe(object):
   def __init__(i,hi=5,lo=-5,kooling=0.6, a=0.8, b=3, indepSize=3, basehi=1000, 
                baselo=-1000, iterations=2000):
-    i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.a, i.b, i.indepSize, i.iterations= \
-    hi, lo, basehi, baselo, kooling, a, b, indepSize, iterations
+    i.hi, i.lo, i.basehi, i.baselo, i.kooling = hi, lo, basehi, baselo, kooling
+    i.a, i.b, i.indepSize, i.iterations= a, b, indepSize, iterations
     random.seed()
   def f1(i,x):
     return np.sum([-10*exp**(-0.2*sqrt(x[z]**2+x[z+1]**2)) \
@@ -103,8 +103,8 @@ class Fonseca(object):
 class ZDT1(object):
   def __init__(i,hi=1,lo=0, basehi=1, baselo=0, kooling=7e-3, indepSize=30, 
                iterations=2000):
-    i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= \
-    hi, lo, basehi, baselo, kooling, indepSize, iterations
+    i.hi, i.lo, i.basehi, i.baselo= hi, lo, basehi, baselo 
+    i.kooling, i.indepSize, i.iterations= kooling, indepSize, iterations
     random.seed()
   def f1(i,x):
     return x[0]
@@ -120,8 +120,8 @@ class ZDT1(object):
 class ZDT3(object):
   def __init__(i,hi=1,lo=0, basehi=1, baselo=0, kooling=7e-3, indepSize=30, 
                iterations=2000):
-    i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= \
-    hi, lo, basehi, baselo, kooling, indepSize, iterations
+    i.hi, i.lo, i.basehi, i.baselo = hi, lo, basehi, baselo 
+    i.kooling, i.indepSize, i.iterations = kooling, indepSize, iterations
     random.seed()
   def f1(i,x):
     return x[0]
@@ -138,8 +138,8 @@ class ZDT3(object):
 class Viennet3(object):
   def __init__(i,hi=1,lo=0, basehi=1, baselo=0, kooling=7e-3, indepSize=2, 
                iterations=2000):
-    i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= \
-    hi, lo, basehi, baselo, kooling, indepSize, iterations 
+    i.hi, i.lo, i.basehi, i.baselo =  hi, lo, basehi, baselo
+    i.kooling, i.indepSize, i.iterations= kooling, indepSize, iterations 
     random.seed()
   def f1(i,x):
     return 0.5*x[0]**2+x[1]**2+sin(x[0]**2+x[1]**2)

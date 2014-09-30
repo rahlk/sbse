@@ -35,7 +35,8 @@ class SimulatedAnnealer(object):
     sb = s = [randi(lo, hi) for z in xrange(indepSize)];
     eb = e = modelbasics.energy(s, emax, emin)
     enRec = dynamikliste()  # Creates a growing list.
-    enRec[0] = 0;  # Since iterations start from 1, lets initialize enRec[0] to 0
+    enRec[0] = 0;  
+    # Since iterations start from 1, lets initialize enRec[0] to 0
     analyser = analyzer.analyser()
     epochs = 5 if self.early else iterations;
     k = 1;
@@ -53,7 +54,8 @@ class SimulatedAnnealer(object):
         if self.disp: 
           modelbasics.say('+')
 
-      if modelbasics.do_a_randJump(en, e, t, kooling):  # The cooling factor needs to be reallylow for some reason!!
+      if modelbasics.do_a_randJump(en, e, t, kooling):  
+        # The cooling factor needs to be really low for some reason!!
         s, e, enRec[k] = sn, en, en; 
         if self.disp: 
           modelbasics.say('?')
@@ -184,7 +186,8 @@ class GA(object):
           if indepSize==1:
             flatten = lambda x: x if not isinstance(x, list) else x[0]
             #print he, she
-            child=0.5*(flatten(he)+flatten(she)) if mutate<rand(0,1) else rand(lo,hi)
+            child=0.5*(flatten(he)+flatten(she)) \
+            if mutate<rand(0,1) else rand(lo,hi)
           else:
             #print he, she
             child=he[:int(0.5*indepSize)]+she[int(0.5*indepSize):]
