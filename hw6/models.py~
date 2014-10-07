@@ -71,8 +71,7 @@ class Kursawe(object):
   def __init__(i,hi=5,lo=-5,kooling=0.6, a=0.8, b=3, indepSize=3, basehi=1000, 
                baselo=-1000, thresh=1e-2, iterations=2000):
     i.hi, i.lo, i.basehi, i.baselo, i.kooling = hi, lo, basehi, baselo, kooling
-    i.thresh=thresh
-    i.a, i.b, i.indepSize, i.iterations= a, b, indepSize, iterations
+    i.a, i.b, i.indepSize, i.thresh, i.iterations= a, b, indepSize, thresh, iterations
     random.seed()
   def f1(i,x):
     return np.sum([-10*exp**(-0.2*sqrt(x[z]**2+x[z+1]**2)) \
