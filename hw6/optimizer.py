@@ -27,9 +27,11 @@ def what2say(k,modelName):
   
             
     
-#for x in [Viennet3]:
-for x in [Schaffer, Kursawe, 
-          Fonseca, ZDT1, ZDT3, Viennet3]:
+for x in [Viennet3]:
+#===============================================================================
+# for x in [Schaffer, Kursawe, 
+#           Fonseca, ZDT1, ZDT3, Viennet3]:
+#===============================================================================
   early=True
   E=[]
   for i in xrange(50): sys.stdout.write('_')
