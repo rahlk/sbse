@@ -27,13 +27,13 @@ class SimulatedAnnealer(object):
     self.modelName = modelName
     self.disp = disp
     self.early = early
-  def runSearcher(self):
+  def runSearcher(self,emax,emin):
     modelbasics = modelBasics(self.modelName);
     modelFunction = self.modelName()
     anz = anzeigen();
     hi, lo, kooling, indepSize, thresh, iterations = \
      modelFunction.eigenschaften()
-    emax, emin = modelbasics.baselining(self.modelName)
+    #emax, emin = modelbasics.baselining(self.modelName)
     sb = s = [randi(lo, hi) for z in xrange(indepSize)];
     eb = e = modelbasics.energy(s, emax, emin)
     enRec = dynamikliste()  # Creates a growing list.
@@ -97,12 +97,12 @@ class MaxWalkSat(object):
     self.disp = disp
     self.maxTries = maxTries
     self.maxChanges = maxChanges
-  def runSearcher(self):
+  def runSearcher(self, emax, emin):
     modelbasics = modelBasics(self.modelName);
     modelFunction = self.modelName()
     hi, lo, kooling, indepSize, thresh, iterations = \
     modelFunction.eigenschaften()
-    emax, emin = modelbasics.baselining(self.modelName)
+    #emax, emin = modelbasics.baselining(self.modelName)
     for i in xrange(self.maxTries):
         # Lets create a random assignment, I'll use list comprehesions here.
         x = xn = xb = [rand(lo, hi) for z in xrange(indepSize)]
@@ -147,12 +147,12 @@ class GA(object):
     self.popcap = popcap
     self.generations = generations
     self.crossover= crossover
-  def runSearcher(self):
+  def runSearcher(self, emax, emin):
     modelbasics = modelBasics(self.modelName);
     modelFunction = self.modelName()
     hi, lo, kooling, indepSize, thresh, iterations = \
     modelFunction.eigenschaften()
-    emax, emin = modelbasics.baselining(self.modelName)
+    #emax, emin = modelbasics.baselining(self.modelName)
     #---------------------------------------------------------------------------
     def init_pop(indepSize, lo, hi, N=self.popcap):
       return [[rand(lo,hi) for _ in xrange(indepSize)] for _ in xrange(N)]
@@ -226,11 +226,11 @@ class diffEvolve(object):
     self.early=early
     self.maxIter=maxIter
     self.NP,self.f,self.cf=NP,f,cf
-  def runSearcher(self):
+  def runSearcher(self, emax, emin):
     modelbasics = modelBasics(self.modelName);
     modelFunction = self.modelName()
     hi, lo, __, indepSize, thresh, __ = modelFunction.eigenschaften()
-    emax, emin = modelbasics.baselining(self.modelName)
+    #emax, emin = modelbasics.baselining(self.modelName)
     #---------------------------------------------------------------------------
     def inititalPopultaion(indepSize, lo, hi, N=self.NP):
       return [[lo+(hi-lo)*rand(0,1) for _ in xrange(indepSize)] 
@@ -290,15 +290,15 @@ class PSO(object):
     self.phi1=phi1
     self.phi2=phi2
     self.modelName=modelName
-  def runSearcher(self):
+  def runSearcher(self, emax, emin):
     modelbasics = modelBasics(self.modelName);
     modelFunction = self.modelName()
     score = lambda x: modelbasics.energy(x,emax,emin)
     hi, lo, __, indepSize, thresh, maxIter = modelFunction.eigenschaften()
-    emax, emin = modelbasics.baselining(self.modelName)
+    #emax, emin = modelbasics.baselining(self.modelName)
     def velocity(Pos, Vel, pBest, gBest, hi, phi1=self.phi1, phi2=self.phi2):
       k=2/abs(2-phi1-phi2-math.sqrt(phi1**2+phi2**2)-4*(phi1+phi2))
-      Vel= [k*(Vel[r]+phi1*rand(0,1)*(pBest[r]-Pos[r])\
+      Vel= [1*(Vel[r]+phi1*rand(0,1)*(pBest[r]-Pos[r])\
                +phi2*rand(0,1)*(gBest[r]-Pos[r])) for r in xrange(indepSize)]
       return [v if v<hi else 0 for v in Vel]
     #===========================================================================

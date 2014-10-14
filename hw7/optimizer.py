@@ -1,6 +1,6 @@
 from __future__ import division
 from searcher import *
-from models import *
+from models import * 
 import sys, sk
 from decimal import *
 import numpy as np
@@ -27,14 +27,29 @@ def what2say(k,modelName):
   elif modelName.__doc__=='Particle Swarm Optimization':
     return {'Max: ': hi, 'Min: ': lo, 'Iterations: ': 100, 
             'Number of Particles: ':30, 'phi1: ':1.3, 'phi2: ':2.6}
-  
+
+#===============================================================================
+# Baselining
+#===============================================================================
+emin=emax=0;
 for x in [Schaffer, Kursawe, 
-           Fonseca, ZDT1, ZDT3, Viennet3]:
+          Fonseca, ZDT1, ZDT3, Viennet3, DTLZ7]:
+  for y in [PSO, GA, diffEvolve, SimulatedAnnealer, MaxWalkSat]:
+    k=modelBasics(x)
+    eMax, eMin = k.baselining(x)
+    emax= eMax if eMax>emax else emax
+    emin= eMin if eMin<emin else emin
+print 'Baselining...'
+    
+    
+
+for x in [Schaffer, Kursawe, 
+          Fonseca, ZDT1, ZDT3, Viennet3, DTLZ7]:
   early=True
   E=[]
   for i in xrange(50): sys.stdout.write('_')
   print '\n'
-  print 'Model: ', x.__name__ 
+  print 'Model: ', x.__doc__ 
   for i in xrange(50): sys.stdout.write('-')
   print '\n'
   print strftime("%a, %d %b %Y %H:%M:%S ", gmtime()), 'GMT', '\n'
@@ -53,7 +68,7 @@ for x in [Schaffer, Kursawe,
     #if early: print 'Early Termination!'  , '\n'
     for r in xrange(reps):
       a=y(x,disp=False,early=early)
-      eb[r] =  a.runSearcher()
+      eb[r] =  a.runSearcher(emax, emin)
     eb.insert(0,y.__doc__)
     E.append(eb)
     #print dspl.xtile(eb[1:])
