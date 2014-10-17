@@ -105,7 +105,7 @@ class Fonseca(object):
     return (1-exp**np.sum([(x[z]+1/((i.indepSize)**0.5)) \
                            for z in xrange(i.indepSize)]))
   def score(i,x):
-    return i.f1(x)-i.f2(x)
+    return i.f1(x)+i.f2(x)
   def eigenschaften(i):
     return i.hi, i.lo, i.kooling, i.indepSize, i.thresh, i.iterations
     
@@ -123,7 +123,7 @@ class ZDT1(object):
   def f2(i,x):
     return i.g(x)*(1-sqrt(x[0]/i.g(x)))
   def score(i,x):
-    return (i.f1(x)-i.f2(x))
+    return (i.f1(x)+i.f2(x))
   def eigenschaften(i): # German for features
     return i.hi, i.lo, i.kooling, i.indepSize, i.thresh, i.iterations
   
@@ -141,7 +141,7 @@ class ZDT3(object):
   def f2(i,x):
     return i.g(x)*(1-(x[0]/i.g(x))**0.5-(x[0]/i.g(x))*sin(10*math.pi*x[0]))
   def score(i,x):
-    return (i.f1(x)-i.f2(x))
+    return (i.f1(x)+i.f2(x))
   def eigenschaften(i): # German for features
     return i.hi, i.lo, i.kooling, i.indepSize, i.thresh, i.iterations
 
@@ -160,7 +160,7 @@ class Viennet3(object):
   def f3(i,x):
     return 1/(x[0]**2+x[1]**2+1)-1.1*exp**(-x[0]**2-x[1]**2)
   def score(i,x):
-    return (i.f1(x)-i.f2(x)-i.f3(x))
+    return (i.f1(x)+i.f2(x)+i.f3(x))
   def eigenschaften(i): # German for features
     return i.hi, i.lo, i.kooling, i.indepSize, i.thresh, i.iterations
   

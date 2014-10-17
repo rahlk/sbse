@@ -22,7 +22,7 @@ randi = random.randint
 exp = math.exp
 
 class SimulatedAnnealer(object):
-  "Simulated Annealing"
+  "SA "
   def __init__(self, modelName, disp=False, early=False):
     self.modelName = modelName
     self.disp = disp
@@ -90,7 +90,7 @@ class SimulatedAnnealer(object):
     return eb
     
 class MaxWalkSat(object):
-  "Max Walk-SAT"
+  "MWS"
   def __init__(self, modelName, disp=False, early=True, maxTries=100, 
                maxChanges=100):
     self.modelName = modelName
@@ -139,7 +139,7 @@ class MaxWalkSat(object):
     return modelbasics.energy(xb, emax, emin)
   
 class GA(object):
-  "Genetic Algorithm"
+  "GA "
   def __init__(self, modelName, disp=False, early=True, popcap=50, 
                generations=400, crossover=0.6):
     self.modelName = modelName
@@ -218,7 +218,7 @@ class GA(object):
     return eb         
 
 class diffEvolve(object):
-  "Differential Evolution"
+  "DE "
   def __init__(self, modelName, disp=False, early=False, 
                maxIter=100, NP=100, f=0.75, cf=0.3):
     self.modelName = modelName
@@ -284,7 +284,7 @@ class diffEvolve(object):
     return eBest
     #---------------------------------------------------------------------------
 class PSO(object):
-  "Particle Swarm Optimization"
+  "PSO"
   def __init__(self, modelName, disp=False, early=True, numPart=30, phi1=1.3, phi2=2.8):
     self.numPart=numPart
     self.phi1=phi1

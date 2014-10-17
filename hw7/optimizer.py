@@ -12,19 +12,19 @@ rdivDemo=sk.rdivDemo
 
 def what2say(k,modelName):
   hi, lo, kooling, indepSize, thresh, iterations = k.eigenschaften()
-  if modelName.__doc__=="Simulated Annealing":
+  if modelName.__doc__=="SA ":
     return {'Max: ': hi, 'Min: ': lo, 'Cooling Factor: ':kooling,
             'Iterations: ': iterations}
-  elif modelName.__doc__=="Max Walk-SAT":
+  elif modelName.__doc__=="MWS":
     return {'Max: ': hi, 'Min: ': lo, 'Retries: ': 100,
             'Iterations: ': 100}
-  elif modelName.__doc__=='Genetic Algorithm':
+  elif modelName.__doc__=='GA ':
     return {'Max: ': hi, 'Min: ': lo, 'Population: ': 50, 
             'Generations: ': 400, 'crossover: ': 0.6}
-  elif modelName.__doc__=='Differential Evolution':
+  elif modelName.__doc__=='DE ':
     return {'Max: ': hi, 'Min: ': lo, 'Iterations: ': 100, 
             'NP: ':100, 'f: ':0.75, 'cf: ':0.3}
-  elif modelName.__doc__=='Particle Swarm Optimization':
+  elif modelName.__doc__=='PSO':
     return {'Max: ': hi, 'Min: ': lo, 'Iterations: ': 100, 
             'Number of Particles: ':30, 'phi1: ':1.3, 'phi2: ':2.6}
 
@@ -32,6 +32,8 @@ def what2say(k,modelName):
 # Baselining
 #===============================================================================
 emin=emax=0;
+baselining = {}
+
 for x in [Schaffer, Kursawe, 
           Fonseca, ZDT1, ZDT3, Viennet3, DTLZ7]:
   for y in [PSO, GA, diffEvolve, SimulatedAnnealer, MaxWalkSat]:
@@ -39,8 +41,7 @@ for x in [Schaffer, Kursawe,
     eMax, eMin = k.baselining(x)
     emax= eMax if eMax>emax else emax
     emin= eMin if eMin<emin else emin
-print 'Baselining...'
-    
+    baselining.update({x.__doc__:(emax, emin)})
     
 
 for x in [Schaffer, Kursawe, 
@@ -53,7 +54,7 @@ for x in [Schaffer, Kursawe,
   for i in xrange(50): sys.stdout.write('-')
   print '\n'
   print strftime("%a, %d %b %Y %H:%M:%S ", gmtime()), 'GMT', '\n'
-
+  (e1, e2)= baselining[x.__doc__]
   for y in [PSO, diffEvolve, GA, SimulatedAnnealer, MaxWalkSat]:
     eb=30*[0]
     print 'Searcher: ', y.__doc__ 
@@ -61,14 +62,14 @@ for x in [Schaffer, Kursawe,
     reps=30
     dspl=anzeigen();
     hi, lo, kooling, indepSize, thresh, iterations = k.eigenschaften()
-    print 'Settings:'
+    #print 'Settings:'
     toprint=what2say(k,y);
-    for k in toprint:
-      print k, toprint[k]
+    #for k in toprint:
+    # print k, toprint[k]
     #if early: print 'Early Termination!'  , '\n'
     for r in xrange(reps):
       a=y(x,disp=False,early=early)
-      eb[r] =  a.runSearcher(emax, emin)
+      eb[r] =  a.runSearcher(e1, e2)
     eb.insert(0,y.__doc__)
     E.append(eb)
     #print dspl.xtile(eb[1:])
