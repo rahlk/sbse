@@ -22,6 +22,7 @@ randi = random.randint
 exp = math.exp
 
 class SimulatedAnnealer(object):
+  " SA"
   def __init__(self, modelName, disp=False, early=False):
     self.modelName = modelName
     self.disp = disp
@@ -88,6 +89,7 @@ class SimulatedAnnealer(object):
     return eb
     
 class MaxWalkSat(object):
+  "MSW"
   def __init__(self, modelName, disp=False, early=True, maxTries=100, 
                maxChanges=100):
     self.modelName = modelName
@@ -136,6 +138,7 @@ class MaxWalkSat(object):
     return modelbasics.energy(xb, emax, emin)
   
 class GA(object):
+  " GA"
   def __init__(self, modelName, disp=False, early=True, popcap=50, 
                generations=400, crossover=0.6):
     self.modelName = modelName

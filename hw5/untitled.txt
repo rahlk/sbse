@@ -1,185 +1,222 @@
 Model:  Schaffer
 Searcher:  GA
-Tue, 30 Sep 2014 12:03:56  
+Tue, 21 Oct 2014 18:52:59  
 
-Einstellungen:
+Settings:
 min= -100 , max= 100 , Cooling Factor= 0.7 
 
 Early Termination! 
 
-Energy:  1.001E-6
+Energy:  1.012E-6
 Model:  Schaffer
 Searcher:  SimulatedAnnealer
-Tue, 30 Sep 2014 12:04:04  
+Tue, 21 Oct 2014 18:53:06  
 
-Einstellungen:
+Settings:
 min= -100 , max= 100 , Cooling Factor= 0.7 
 
 Early Termination! 
 
-Energy:  1.247E-6
+Energy:  1.280E-6
 Model:  Schaffer
 Searcher:  MaxWalkSat
-Tue, 30 Sep 2014 12:04:05  
+Tue, 21 Oct 2014 18:53:07  
 
-Einstellungen:
+Settings:
 min= -100 , max= 100 , Cooling Factor= 0.7 
 
 Early Termination! 
 
-Energy:  5.915E-3
+Energy:  3.055E-3
 
 rank ,         name ,    med   ,  iqr 
 ----------------------------------------------------
-   1 ,           GA ,       0  ,     0 (*              |              ),9.98113672864e-07, 9.98432760653e-07, 9.98840387633e-07, 9.9991653446e-07, 1.00569181989e-06
-   1 , SimulatedAnnealer ,       0  ,     0 (*              |              ),1.00311060204e-06, 1.03214039387e-06, 1.09432718645e-06, 1.19076443933e-06, 1.69891958553e-06
-   1 ,   MaxWalkSat ,       1  ,     1 (  ------       |    *         ),0.000714398152921, 0.00273191608181, 0.00667472022421, 0.00978373426733, 0.00978743138259
+   1 ,           GA ,    1.00E-06  ,  4.30E-09 (*              |              ),9.99E-07, 1.00E-06, 1.00E-06, 1.00E-06, 1.01E-06
+   1 ,           SA ,    1.08E-06  ,  1.70E-07 (*              |              ),1.00E-06, 1.03E-06, 1.08E-06, 1.17E-06, 1.86E-06
+   1 ,          MSW ,    2.14E-03  ,  4.22E-03 (----   *   ----|------------  ),2.67E-05, 1.35E-03, 2.27E-03, 3.72E-03, 9.22E-03
 
 Model:  Kursawe
 Searcher:  GA
-Tue, 30 Sep 2014 12:06:57  
+Tue, 21 Oct 2014 18:53:07  
 
-Einstellungen:
+Settings:
 min= -5 , max= 5 , Cooling Factor= 0.6 
 
 Early Termination! 
 
-Energy:  1.189E-5
+Energy:  1.578E-5
 Model:  Kursawe
 Searcher:  SimulatedAnnealer
-Tue, 30 Sep 2014 12:07:47  
+Tue, 21 Oct 2014 18:53:39  
 
-Einstellungen:
+Settings:
 min= -5 , max= 5 , Cooling Factor= 0.6 
 
 Early Termination! 
 
-Energy:  4.578E-5
+Energy:  4.485E-5
 Model:  Kursawe
 Searcher:  MaxWalkSat
-Tue, 30 Sep 2014 12:07:56  
+Tue, 21 Oct 2014 18:53:41  
 
-Einstellungen:
+Settings:
 min= -5 , max= 5 , Cooling Factor= 0.6 
 
 Early Termination! 
 
-Energy:  8.067E-3
+Energy:  4.511E-3
 
 rank ,         name ,    med   ,  iqr 
 ----------------------------------------------------
-   1 ,           GA ,       0  ,     0 (*              |              ),1.44747165897e-06, 8.95590638039e-06, 1.15919968595e-05, 1.34677717769e-05, 2.70096806887e-05
-   1 , SimulatedAnnealer ,       0  ,     0 (*              |              ),3.23986598409e-06, 1.61685279028e-05, 3.63686615269e-05, 6.23008524363e-05, 9.74134914996e-05
-   1 ,   MaxWalkSat ,       1  ,     1 ( ----  *       |-----         ),0.00130597043854, 0.00436166486151, 0.00606949709584, 0.0118199646367, 0.0167761374819
+   1 ,           GA ,    1.05E-05  ,  1.68E-05 (*              |              ),2.89E-06, 6.97E-06, 1.11E-05, 2.09E-05, 3.61E-05
+   1 ,           SA ,    2.95E-05  ,  4.68E-05 (*              |              ),3.52E-06, 1.52E-05, 3.09E-05, 5.33E-05, 1.30E-04
+   1 ,          MSW ,    4.22E-03  ,  4.34E-03 (  ------      *|   ---------  ),9.03E-04, 2.75E-03, 4.43E-03, 6.23E-03, 8.92E-03
 
+Model:  Fonseca
+Searcher:  GA
+Tue, 21 Oct 2014 18:53:42  
+
+Settings:
+min= -4 , max= 4 , Cooling Factor= 1.99 
+
+Early Termination! 
+
+Energy:  7.397E-1
+Model:  Fonseca
+Searcher:  SimulatedAnnealer
+Tue, 21 Oct 2014 18:54:15  
+
+Settings:
+min= -4 , max= 4 , Cooling Factor= 1.99 
+
+Early Termination! 
+
+Energy:  9.473E-1
+Model:  Fonseca
+Searcher:  MaxWalkSat
+Tue, 21 Oct 2014 18:54:16  
+
+Settings:
+min= -4 , max= 4 , Cooling Factor= 1.99 
+
+Early Termination! 
+
+Energy:  9.919E-1
+
+rank ,         name ,    med   ,  iqr 
+----------------------------------------------------
+   1 ,           GA ,    7.97E-01  ,  2.09E-01 (           ----|--    * -     ),5.20E-01, 7.04E-01, 8.00E-01, 8.46E-01, 8.88E-01
+   2 ,           SA ,    9.60E-01  ,  4.92E-02 (               |         -- * ),8.85E-01, 9.34E-01, 9.63E-01, 9.71E-01, 9.87E-01
+   3 ,          MSW ,    1.00E+00  ,  5.66E-04 (               |             *),9.81E-01, 1.00E+00, 1.00E+00, 1.00E+00, 1.00E+00
 
 Model:  ZDT1
 Searcher:  GA
-Tue, 30 Sep 2014 12:19:49  
+Tue, 21 Oct 2014 18:55:20  
 
-Einstellungen:
+Settings:
 min= 0 , max= 1 , Cooling Factor= 0.007 
 
 Early Termination! 
 
-Energy:  1.711E-1
+Energy:  6.618E-2
 Model:  ZDT1
 Searcher:  SimulatedAnnealer
-Tue, 30 Sep 2014 12:20:57  
+Tue, 21 Oct 2014 18:56:04  
 
-Einstellungen:
+Settings:
 min= 0 , max= 1 , Cooling Factor= 0.007 
 
 Early Termination! 
 
-Energy:  2.606E-1
+Energy:  8.861E-2
 Model:  ZDT1
 Searcher:  MaxWalkSat
-Tue, 30 Sep 2014 12:21:14  
+Tue, 21 Oct 2014 18:56:06  
 
-Einstellungen:
+Settings:
 min= 0 , max= 1 , Cooling Factor= 0.007 
 
 Early Termination! 
 
-Energy:  6.713E-1
+Energy:  2.618E-1
 
 rank ,         name ,    med   ,  iqr 
 ----------------------------------------------------
-   1 ,           GA ,      17  ,     2 ( *             |              ),0.155096886917, 0.165566306223, 0.169350708843, 0.17841488398, 0.188281036272
-   2 , SimulatedAnnealer ,      26  ,     4 (   - *         |              ),0.22999159378, 0.243963085385, 0.261072122409, 0.278528894727, 0.291461073286
-   3 ,   MaxWalkSat ,      66  ,     8 (               |    - * ---   ),0.603278844357, 0.627297952356, 0.661575274039, 0.71009360084, 0.775995074874
+   1 ,           GA ,    6.64E-02  ,  4.83E-03 (*              |              ),6.22E-02, 6.45E-02, 6.66E-02, 6.79E-02, 7.07E-02
+   2 ,           SA ,    8.74E-02  ,  1.20E-02 ( -*-           |              ),7.81E-02, 8.38E-02, 8.75E-02, 9.47E-02, 1.01E-01
+   3 ,          MSW ,    2.62E-01  ,  5.52E-02 (               |--   * --     ),2.19E-01, 2.35E-01, 2.62E-01, 2.82E-01, 3.08E-01
 
 Model:  ZDT3
 Searcher:  GA
-Tue, 30 Sep 2014 12:22:48  
+Tue, 21 Oct 2014 18:56:41  
 
-Einstellungen:
+Settings:
 min= 0 , max= 1 , Cooling Factor= 0.007 
 
 Early Termination! 
 
-Energy:  6.935E-2
+Energy:  2.700E-2
 Model:  ZDT3
 Searcher:  SimulatedAnnealer
-Tue, 30 Sep 2014 12:24:25  
+Tue, 21 Oct 2014 18:57:43  
 
-Einstellungen:
+Settings:
 min= 0 , max= 1 , Cooling Factor= 0.007 
 
 Early Termination! 
 
-Energy:  1.911E-1
+Energy:  6.626E-2
 Model:  ZDT3
 Searcher:  MaxWalkSat
-Tue, 30 Sep 2014 12:24:49  
+Tue, 21 Oct 2014 18:57:46  
 
-Einstellungen:
+Settings:
 min= 0 , max= 1 , Cooling Factor= 0.007 
 
 Early Termination! 
 
-Energy:  6.764E-1
+Energy:  2.686E-1
 
 rank ,         name ,    med   ,  iqr 
 ----------------------------------------------------
-   1 ,           GA ,       7  ,     2 (*              |              ),0.052560273042, 0.0597962716303, 0.0659324772363, 0.0803199696541, 0.0926128160123
-   2 , SimulatedAnnealer ,      19  ,     7 (     *-        |              ),0.141615084303, 0.157786313098, 0.193777052917, 0.223267538551, 0.260261521286
-   3 ,   MaxWalkSat ,      69  ,    14 (               | ---- * --    ),0.535402355897, 0.649625502773, 0.696356743925, 0.738913114143, 0.818499718571
+   1 ,           GA ,    2.75E-02  ,  7.01E-03 (*              |              ),2.07E-02, 2.42E-02, 2.75E-02, 2.84E-02, 3.42E-02
+   2 ,           SA ,    6.35E-02  ,  2.56E-02 (  - *--        |              ),4.56E-02, 5.64E-02, 6.40E-02, 7.54E-02, 9.50E-02
+   3 ,          MSW ,    2.72E-01  ,  4.08E-02 (               |    ---  * -  ),2.24E-01, 2.59E-01, 2.73E-01, 2.92E-01, 3.09E-01
 
 Model:  Viennet3
 Searcher:  GA
-Tue, 30 Sep 2014 12:27:06  
+Tue, 21 Oct 2014 18:58:37  
 
-Einstellungen:
+Settings:
 min= 0 , max= 1 , Cooling Factor= 0.007 
 
 Early Termination! 
 
-Energy:  7.302E-1
+Energy:  4.040E-1
 Model:  Viennet3
 Searcher:  SimulatedAnnealer
-Tue, 30 Sep 2014 12:27:15  
+Tue, 21 Oct 2014 18:58:45  
 
-Einstellungen:
+Settings:
 min= 0 , max= 1 , Cooling Factor= 0.007 
 
 Early Termination! 
 
-Energy:  7.320E-1
+Energy:  4.065E-1
 Model:  Viennet3
 Searcher:  MaxWalkSat
-Tue, 30 Sep 2014 12:27:16  
+Tue, 21 Oct 2014 18:58:45  
 
-Einstellungen:
+Settings:
 min= 0 , max= 1 , Cooling Factor= 0.007 
 
 Early Termination! 
 
-Energy:  8.670E-1
+Energy:  4.785E-1
 
 rank ,         name ,    med   ,  iqr 
 ----------------------------------------------------
-   1 ,           GA ,      73  ,     0 (*              |              ),0.729230271726, 0.729614703334, 0.730248689469, 0.730634333075, 0.731485681383
-   1 , SimulatedAnnealer ,      73  ,     0 (*              |              ),0.729435733414, 0.731177988135, 0.732102753282, 0.733383811436, 0.73451901296
-   2 ,   MaxWalkSat ,      85  ,    14 (   ----      * |     -------  ),0.757747925335, 0.800349513872, 0.852135047099, 0.929543076224, 0.988453705913
+   1 ,           GA ,    4.03E-01  ,  5.34E-03 ( *-            |              ),4.00E-01, 4.01E-01, 4.03E-01, 4.05E-01, 4.11E-01
+   1 ,           SA ,    4.06E-01  ,  7.80E-03 (- *-           |              ),4.00E-01, 4.03E-01, 4.06E-01, 4.09E-01, 4.14E-01
+   2 ,          MSW ,    4.87E-01  ,  5.40E-02 (    -----------|       *   -  ),4.18E-01, 4.65E-01, 4.93E-01, 5.10E-01, 5.17E-01
+

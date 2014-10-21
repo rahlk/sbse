@@ -24,13 +24,13 @@ for x in [Schaffer, Kursawe,
     reps=30
     dspl=anzeigen();
     hi, lo, kooling, indepSize, iterations = k.eigenschaften()
-    print 'Einstellungen:'
+    print 'Settings:'
     print 'min=', lo, ', max=', hi, ', Cooling Factor=', kooling, '\n'
     if early: print 'Early Termination!'  , '\n'
     for r in xrange(reps):
       a=y(x,disp=False,early=early)
       eb[r] =  a.runSearcher()
-    eb.insert(0,y.__name__)
+    eb.insert(0,y.__doc__)
     E.append(eb)
     #print dspl.xtile(eb[1:])
     """for r in xrange(reps):

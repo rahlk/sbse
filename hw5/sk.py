@@ -66,7 +66,7 @@ def pairs(lst):
 def xtile(lst,lo=0,hi=1,width=50,
              chops=[0.1 ,0.3,0.5,0.7,0.9],
              marks=["-" ," "," ","-"," "],
-             bar="|",star="*",show=" %0.2E"):
+             bar="|",star="*",show=" %0.2F"):
   """The function _xtile_ takes a list of (possibly)
   unsorted numbers and presents them as a horizontal
   xtile chart (in ascii format). The default is a 
@@ -78,7 +78,7 @@ def xtile(lst,lo=0,hi=1,width=50,
   def place(x) : 
     return int(width*float((x - lo))/(hi - lo+0.00001))
   def pretty(lst) : 
-    return ', '.join([str(x) for x in lst])
+    return ', '.join([str(show % x) for x in lst])
   ordered = sorted(lst)
   lo      = min(lo,ordered[0])
   hi      = max(hi,ordered[-1])
@@ -97,7 +97,7 @@ def _tileX() :
   import random
   random.seed(1)
   nums = [random.random()**2 for _ in range(100)]
-  print xtile(nums,lo=0,hi=1.0,width=25,show=" %0.3E")
+  print xtile(nums,lo=0,hi=1.0,width=25,show=" %0.2F")
 """
 
 ### Standard Accumulator for Numbers

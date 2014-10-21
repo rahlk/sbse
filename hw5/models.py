@@ -84,7 +84,7 @@ class Kursawe(object):
     return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
     
 class Fonseca(object):
-  def __init__(i,hi=4,lo=-4, basehi=5, baselo=-5, kooling=1.99, indepSize=3, 
+  def __init__(i,hi=4,lo=-4, basehi=7, baselo=-7, kooling=1.99, indepSize=3, 
                iterations=2000):
     i.hi, i.lo, i.basehi, i.baselo, i.kooling, i.indepSize, i.iterations= \
     hi, lo, basehi, baselo, kooling, indepSize, iterations
@@ -101,7 +101,7 @@ class Fonseca(object):
     return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
     
 class ZDT1(object):
-  def __init__(i,hi=1,lo=0, basehi=1, baselo=0, kooling=7e-3, indepSize=30, 
+  def __init__(i,hi=1,lo=0, basehi=3, baselo=0, kooling=7e-3, indepSize=30, 
                iterations=2000):
     i.hi, i.lo, i.basehi, i.baselo= hi, lo, basehi, baselo 
     i.kooling, i.indepSize, i.iterations= kooling, indepSize, iterations
@@ -118,7 +118,7 @@ class ZDT1(object):
     return i.hi, i.lo, i.kooling, i.indepSize, i.iterations
   
 class ZDT3(object):
-  def __init__(i,hi=1,lo=0, basehi=1, baselo=0, kooling=7e-3, indepSize=30, 
+  def __init__(i,hi=1,lo=0, basehi=3, baselo=0, kooling=7e-3, indepSize=30, 
                iterations=2000):
     i.hi, i.lo, i.basehi, i.baselo = hi, lo, basehi, baselo 
     i.kooling, i.indepSize, i.iterations = kooling, indepSize, iterations
@@ -136,7 +136,7 @@ class ZDT3(object):
 
 
 class Viennet3(object):
-  def __init__(i,hi=1,lo=0, basehi=1, baselo=0, kooling=7e-3, indepSize=2, 
+  def __init__(i,hi=1,lo=0, basehi=3, baselo=0, kooling=7e-3, indepSize=2, 
                iterations=2000):
     i.hi, i.lo, i.basehi, i.baselo =  hi, lo, basehi, baselo
     i.kooling, i.indepSize, i.iterations= kooling, indepSize, iterations 
