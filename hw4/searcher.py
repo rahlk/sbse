@@ -20,22 +20,26 @@ randi = random.randint
 exp = math.exp
 
 class SimulatedAnnealer(object):
-  def __init__(self, modelName, disp=False, early=False):
+  "SA "
+  def __init__(self, modelName, emax, emin, disp=False, early=False):
     self.modelName = modelName
     self.disp = disp
     self.early = early
+    self.emax, self.emin = emax, emin
   def runSearcher(self):
     modelbasics = modelBasics(self.modelName);
     modelFunction = self.modelName()
     anz = anzeigen();
-    hi, lo, kooling, indepSize, iterations = modelFunction.eigenschaften()
-    emax, emin = modelbasics.baselining(self.modelName)
+    hi, lo, kooling, indepSize, iterations = \
+     modelFunction.eigenschaften()
+    emax, emin = self.emax, self.emin
     sb = s = [randi(lo, hi) for z in xrange(indepSize)];
-    eb = e = modelbasics.energy(s, emax, emin)
+    eb = e = modelbasics.energy(s, self.emax, self.emin)
     enRec = dynamikliste()  # Creates a growing list.
-    enRec[0] = 0;  # Since iterations start from 1, lets initialize enRec[0] to 0
+    enRec[0] = 0;  
+    # Since iterations start from 1, lets initialize enRec[0] to 0
     analyser = analyzer.analyser()
-    epochs = 5 if self.early else iterations;
+    epochs = 3 if self.early else iterations;
     k = 1;
     while epochs and k < iterations:
       sn = modelbasics.neighbour(s, hi, lo)
@@ -43,22 +47,22 @@ class SimulatedAnnealer(object):
       t = k / iterations
       if en < eb:
         eb, sb, enRec[k] = en, sn, en;
-        if self.disp: 
-          modelbasics.say('!')
-
+        #if self.disp: 
+          #modelbasics.say('!')
       if en < e:
-        s, e, enRec[k] = sn, en, eb; 
-        if self.disp: 
-          modelbasics.say('+')
+        s, e, enRec[k] = sn, en, en; 
+        #if self.disp: 
+          #modelbasics.say('+')
 
-      elif modelbasics.do_a_randJump(en, e, t, kooling):  # The cooling factor needs to be reallylow for some reason!!
-        s, e, enRec[k] = sn, en, eb; 
-        if self.disp: 
-          modelbasics.say('?')
+      if modelbasics.do_a_randJump(en, e, t, kooling):  
+        # The cooling factor needs to be really low for some reason!!
+        s, e, enRec[k] = sn, en, en; 
+        #if self.disp: 
+          #modelbasics.say('?')
       else:
-        enRec[k] = eb  
-      if self.disp:
-        modelbasics.say('.')
+        enRec[k] = en  
+      #if self.disp:
+      #  modelbasics.say('.')
       if k % 50 == 0 and k > 50:
         # print enRec[:-10]
         proceed = analyser.isItGettinBetter(enRec[k - 100:])
@@ -68,69 +72,69 @@ class SimulatedAnnealer(object):
           epochs -= 1;
         # print enRec[k-40:] #
       k = k + 1
-      if k % 40 == 0:
-        if self.disp: 
-          modelbasics.say('\n')  # sa.say(format(sb,'0.2f'))    
-        
-    if self.disp: 
-      modelbasics.say('\n'),  # modelbasics.say('Best Value Found '), modelbasics.say(sb)
-
-  # Print Energy and best value.
+      era=1;
+    
+    # Print Energy and best value.
     for i in xrange(k):
       if self.disp:
         if i % 50 == 0:
-          print anz.xtile(enRec[i - 50:]) 
+          print era, anz.xtile(enRec[i - 50:], show='%0.2E') 
+          era+=1
     if self.disp: 
       modelbasics.say('\n')
-    return eb
+    return [eb, modelbasics.energyIndv(sb, emax, emin)]
     
 class MaxWalkSat(object):
-  def __init__(self, modelName, disp=False, early=True, maxTries=100, maxChanges=100):
+  "MWS"
+  def __init__(self, modelName, emax, emin, disp=False, early=True, maxTries=100, 
+               maxChanges=100):
     self.modelName = modelName
     self.disp = disp
     self.maxTries = maxTries
     self.maxChanges = maxChanges
+    self.emax, self.emin = emax, emin
   def runSearcher(self):
     modelbasics = modelBasics(self.modelName);
     modelFunction = self.modelName()
-    hi, lo, kooling, indepSize, iterations = modelFunction.eigenschaften()
-    emax, emin = modelbasics.baselining(self.modelName)
+    hi, lo, kooling, indepSize, iterations = \
+    modelFunction.eigenschaften()
+    thresh=1e-4
+    emax, emin = self.emax, self.emin
     for i in xrange(self.maxTries):
         # Lets create a random assignment, I'll use list comprehesions here.
         x = xn = xb = [rand(lo, hi) for z in xrange(indepSize)]
-        # Create a threshold for energy, let's say thresh=0.1% of emax (which is 1) for starters
-        thresh = 1e-7
+        # Create a threshold for energy, 
+        # let's say thresh=0.1% of emax (which is 1) for starters
         for j in xrange(self.maxChanges):
             # Let's check if energy has gone below the threshold.
             # If so, look no further.
             if modelbasics.energy(xn, emax, emin) < thresh:
-                if self.disp:
-                  modelbasics.say('.')
-                break
+                xb=xn
             else:
-                randIndx = randi(0, indepSize - 1)  # Choose a random part of solution x
+              # Choose a random part of solution x
+                randIndx = randi(0, indepSize - 1)  
                 if rand(0, 1) > 1 / (indepSize + 1):  # Probablity p=0.33
                     y = xn[randIndx]
                     xn[randIndx] = modelbasics.simpleneighbour(y, hi, lo)
-                    if self.disp:
-                      modelbasics.say('+')
                     # print 'Random change on', randIndx
                 else:
                     # xTmp is a temporary variable
                     xBest = emax;
                     # Step from xmin to xmax, take 10 steps
-                    Step = np.linspace(lo, hi, 100)
-                    if self.disp:
-                      modelbasics.say('!')
+                    Step = np.linspace(lo, hi, 10)
                     for i in xrange(np.size(Step)):
                         xNew = xn; xNew[randIndx] = Step[i];
                         if modelbasics.energy(xNew, emax, emin) < xBest:
                             xBest = modelbasics.energy(xNew, emax, emin)
                             xn = xNew
-        
-        if modelbasics.energy(xn, emax, emin) < modelbasics.energy(xb, emax, emin):
-          xb = xn
-    return modelbasics.energy(xb, hi, lo)
+            
+            if modelbasics.energy(xn, emax, emin) < modelbasics.energy(xb, 
+                                                                       emax, 
+                                                                       emin):
+              xb = xn
+              print modelbasics.energy(xn, emax, emin)
+    return [modelbasics.energy(xb, emax, emin), modelbasics.energyIndv(xb, emax, emin)]
+
     
 if __name__ == 'main':
   SimulatedAnnealer(Schaffer)

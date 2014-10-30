@@ -18,7 +18,7 @@ Range5=[rand(12,30) for _ in xrange(5)]; Range5.insert(0,'Range5')
 Range6=[rand(30,50) for _ in xrange(5)]; Range6.insert(0,'Range6')
 
 
-def _rDiv():
+def _rdiv():
   rdivDemo([
             Range1,
             Range2,
@@ -27,4 +27,4 @@ def _rDiv():
             Range5,
             Range6,
             ])
-_rDiv()
+_rdiv()

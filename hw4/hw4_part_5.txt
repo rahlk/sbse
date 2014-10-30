@@ -1,0 +1,161 @@
+Model:  Schaffer
+Searcher:  SA 
+Thu, 30 Oct 2014 11:53:05  
+
+Settings:
+min= -100 , max= 100 , Cooling Factor= 0.0001 
+
+Early Termination! 
+
+Best Energy:  0.000 
+
+     Energy *                        |                        , 0.00,  0.00,  0.00,  0.00,  0.00
+Objective 1 *                        |                        , 0.00,  0.00,  0.00,  0.00,  0.00
+Objective 2 *                        |                        , 0.00,  0.00,  0.00,  0.00,  0.00
+__________________________________________________
+
+Model:  Schaffer
+Searcher:  MWS
+Thu, 30 Oct 2014 11:53:05  
+
+Settings:
+min= -100 , max= 100 , Cooling Factor= 0.0001 
+
+Early Termination! 
+
+Best Energy:  0.000 
+
+     Energy --    *    -----------   |                        , 0.00,  0.00,  0.00,  0.00,  0.00
+Objective 1 -   *  ---------         |                        , 0.00,  0.00,  0.00,  0.00,  0.00
+Objective 2 -  *    ----             |                        , 0.00,  0.00,  0.00,  0.00,  0.00
+__________________________________________________
+
+Model:  Kursawe
+Searcher:  SA 
+Thu, 30 Oct 2014 11:53:08  
+
+Settings:
+min= -5 , max= 5 , Cooling Factor= 0.6 
+
+Early Termination! 
+
+Best Energy:  0.015 
+
+     Energy             -         *  |   ------               , -0.03,  -0.02,  0.02,  0.04,  0.07
+Objective 1                   ------ |*           ----------  , 0.17,  0.18,  0.19,  0.22,  0.25
+Objective 2      --------      *    -|--------------          , 0.32,  0.35,  0.38,  0.40,  0.47
+__________________________________________________
+
+Model:  Kursawe
+Searcher:  MWS
+Thu, 30 Oct 2014 11:53:09  
+
+Settings:
+min= -5 , max= 5 , Cooling Factor= 0.6 
+
+Early Termination! 
+
+Best Energy:  0.496 
+
+     Energy           ------         |*           ------      , 0.33,  0.39,  0.49,  0.62,  0.69
+Objective 1       ---------------    |         *      ------  , 0.28,  0.33,  0.38,  0.40,  0.42
+Objective 2          ----------      *        ----------      , 0.56,  0.64,  0.70,  0.78,  0.87
+__________________________________________________
+
+Model:  Fonseca
+Searcher:  SA 
+Thu, 30 Oct 2014 11:54:04  
+
+Settings:
+min= -4 , max= 4 , Cooling Factor= 1.99 
+
+Early Termination! 
+
+Best Energy:  -0.682 
+
+     Energy         --------------   | *   -------------      , -1.55,  -0.86,  -0.62,  -0.40,  0.25
+Objective 1         --------------   | *   -------------      , 0.92,  0.94,  0.95,  0.96,  0.98
+Objective 2      ------   *        --|--------------          , 0.22,  0.45,  0.58,  0.91,  1.55
+__________________________________________________
+
+Model:  Fonseca
+Searcher:  MWS
+Thu, 30 Oct 2014 11:54:04  
+
+Settings:
+min= -4 , max= 4 , Cooling Factor= 1.99 
+
+Early Termination! 
+
+Best Energy:  -1.249 
+
+     Energy                   *     -|-----------             , -2.24,  -2.21,  -1.06,  -0.65,  0.20
+Objective 1                   *     -|-----------             , 0.90,  0.90,  0.94,  0.95,  0.98
+Objective 2  ----------------    *   |                        , 0.30,  0.89,  1.05,  2.14,  2.14
+__________________________________________________
+
+Model:  ZDT1
+Searcher:  SA 
+Thu, 30 Oct 2014 11:54:42  
+
+Settings:
+min= 0 , max= 1 , Cooling Factor= 0.007 
+
+Early Termination! 
+
+Best Energy:  0.539 
+
+     Energy                  ------- | *   ------             , 0.49,  0.53,  0.54,  0.56,  0.60
+Objective 1         -----------------|-------    *       ---- , 0.03,  0.10,  0.12,  0.14,  0.15
+Objective 2                ----    * |    -------------       , 0.37,  0.39,  0.43,  0.47,  0.56
+__________________________________________________
+
+Model:  ZDT1
+Searcher:  MWS
+Thu, 30 Oct 2014 11:54:42  
+
+Settings:
+min= 0 , max= 1 , Cooling Factor= 0.007 
+
+Early Termination! 
+
+Best Energy:  0.713 
+
+     Energy       ------      *     -|-----                   , 0.63,  0.67,  0.71,  0.76,  0.81
+Objective 1    ----------            |      *      ---------  , 0.01,  0.04,  0.10,  0.12,  0.15
+Objective 2       -----      *    ---|---------               , 0.51,  0.56,  0.63,  0.67,  0.80
+__________________________________________________
+
+Model:  Viennet3
+Searcher:  SA 
+Thu, 30 Oct 2014 11:55:15  
+
+Settings:
+min= 0 , max= 1 , Cooling Factor= 0.007 
+
+Early Termination! 
+
+Best Energy:  0.730 
+
+     Energy     ---      *    -------|-------------           , 0.73,  0.73,  0.73,  0.73,  0.73
+Objective 1          ------------    |  *         ----------  , 0.01,  0.01,  0.01,  0.02,  0.02
+Objective 2      -------    *        |  ------------          , 0.72,  0.72,  0.73,  0.73,  0.74
+__________________________________________________
+
+Model:  Viennet3
+Searcher:  MWS
+Thu, 30 Oct 2014 11:55:15  
+
+Settings:
+min= 0 , max= 1 , Cooling Factor= 0.007 
+
+Early Termination! 
+
+Best Energy:  0.887 
+
+     Energy          ------------    |        * --------      , 0.80,  0.85,  0.92,  0.93,  0.97
+Objective 1                   -------|--        *    -------- , 0.04,  0.06,  0.08,  0.09,  0.11
+Objective 2     ----------        *  |      -----------       , 0.72,  0.77,  0.81,  0.85,  0.91
+__________________________________________________
+
+
