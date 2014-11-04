@@ -1,6 +1,6 @@
 #!/bin/bash
 
 Title="csc710sbse: hw4:Rahul Krishna"
-a2ps --center-title="$Title" -qr2gC -o ~/listing.ps rdivdemo.py searcher.py optimizer.py models.py 
-ps2pdf ~/listing.ps listing.pdf
+a2ps --center-title="$Title" -qr2gC -f6 --landscape -o ~/listing1.ps rdivdemo.py searcher.py optimizer.py models.py 
+ps2pdf ~/listing.ps listing1.pdf
 
